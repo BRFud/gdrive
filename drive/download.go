@@ -32,7 +32,7 @@ func (self *Drive) Download(args DownloadArgs) error {
 	f, err := self.service.Files.Get(args.Id).Fields("id", "name", "size", "mimeType", "md5Checksum").Do()
 	if err != nil {
 		//return fmt.Errorf("Failed to get file: %s", err)
-		fmt.Printf("Failed to get file: %s", err)
+		fmt.Printf(">>Failed to get file: %s", err)
 		return nil
 	}
 
@@ -113,7 +113,7 @@ func (self *Drive) downloadRecursive(args DownloadArgs) error {
 	f, err := self.service.Files.Get(args.Id).Fields("id", "name", "size", "mimeType", "md5Checksum").Do()
 	if err != nil {
 		//return fmt.Errorf("Failed to get file: %s", err)
-		fmt.Printf("Failed to get file: %s", err)
+		fmt.Printf(">>Failed to get file: %s", err)
 		return nil
 	}
 
@@ -146,7 +146,7 @@ func (self *Drive) downloadBinary(f *drive.File, args DownloadArgs) (int64, int6
 	fpath := filepath.Join(args.Path, f.Name)
 
 	if !args.Stdout {
-		fmt.Fprintf(args.Out, "Downloading %s -> %s\n", f.Name, fpath)
+		fmt.Fprintf(args.Out, ">Downloading %s -> %s\n", f.Name, fpath)
 	}
 
 	return self.saveFile(saveFileArgs{
